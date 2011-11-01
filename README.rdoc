@@ -1,0 +1,3 @@
+= BufferedLoggerExtension
+
+Adds timestamp, filename and line number and stack traces to standard rails buffered logging.
