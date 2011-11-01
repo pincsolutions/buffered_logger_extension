@@ -10,15 +10,14 @@ Gem::Specification.new do |s|
   s.authors     = ["Christopher Maujean"]
   s.email       = ["cmaujean@pincsolutions.com"]
   s.homepage    = "http://www.pincsolutions.com/"
-  s.summary     = "TODO: Summary of BufferedLoggerExtension."
-  s.description = "TODO: Description of BufferedLoggerExtension."
+  s.summary     = "Adds timestamp, severity, filename, line number, and stack traces to standard rails logging."
+  s.description = "Adds timestamp, severity, filename, line number, and stack traces to standard rails logging."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["lib/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc", "Gemfile"]
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", "~> 3.1.1"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "pry"
 end

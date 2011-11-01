@@ -8,5 +8,8 @@ class TestLogging
     @logger.error("Nothing went wrong, I swear!")
   end
 
-  # new stuff to be added here. Previous method requires that the line number remain the same (brittle, I know)
+  def cause_a_stack_trace
+    @logger.warn("Something is happening, I know it.")
+  end
+  # new stuff to be added here. Previous methods require that the line numbers remain the same for the tests to pass (yes, brittle, I know)
 end

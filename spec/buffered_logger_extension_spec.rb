@@ -15,7 +15,7 @@ describe BufferedLoggerExtension do
   it "adds a timestamp to the front of the log message" do
     curdate = Date.today
     @buflog.info("There should be a timestamp here")
-    LogCapture.last_message.should include(curdate.strftime("%Y-%m-%d"))
+    LogCapture.last_message.should =~ /^\[#{curdate.strftime("%Y-%m-%d")}/
   end
 
   it "adds the severity to the log message" do
@@ -36,5 +36,14 @@ describe BufferedLoggerExtension do
     t = TestLogging.new(@buflog)
     t.fake_log
     LogCapture.last_message.should include("test_logging.rb:8")
+  end
+
+  context "when the severity is > 1 and < 4" do
+    it "adds stack traces to the message" do
+      TestLogging.new(@buflog).cause_a_stack_trace
+      logged = LogCapture.last_message
+      logged.should include("spec/support/test_logging")
+      logged.should include("in `cause_a_stack_trace'")
+    end
   end
 end

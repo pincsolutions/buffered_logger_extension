@@ -1,4 +1,4 @@
-require 'buffered_logger_extension/core_ext'
+require 'buffered_logger_extension/rails_ext'
 
 module BufferedLoggerExtension
 end
