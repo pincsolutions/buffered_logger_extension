@@ -4,9 +4,19 @@ ActiveSupport::BufferedLogger.class_eval do
     ['DEBUG','INFO','WARN','ERROR','FATAL','UNKNOWN'][level]
   end
 
+  # to show a variable name and value, use a block like {"a"}.  Otherwise, this will just print the result of the block.
+  def show_block(blk)
+    var_name = blk.call
+    var_val = eval(var_name, blk.binding).inspect
+    "#{var_name}: #{var_val}"
+  rescue
+    blk.call
+  end
+
   def add(severity, message = nil, progname = nil, &block)
     return if @level > severity
-    message = (message || (block && block.call) || progname).to_s
+    block_msg = block ? show_block(block) : ""
+    message = "#{message.to_s} #{block_msg} #{progname.to_s}"
     # If a newline is necessary then create a new message ending with a newline.
     # Ensures that the original message is not mutated.
     message = "#{message}\n" unless message[-1] == ?\n
